@@ -34,16 +34,15 @@ steps:
     make html
   displayName: 'Generate HTML documents'
 
-- script |
-
-    git fetch --all
-
-    git checkout -B main origin/main
-
-    git merge $(Build.SourceBranchName) --no-ff -m "Merging $(Build.SourceBranchName) into main"
-
+- script: |
+    git config --global user.email "you@example.com"
+    git config --global user.name "Your Name"
+    git checkout main
+    git pull origin main
+    git add -A
+    git commit -m "Update documentation"
     git push origin main
-  displayName: 'Merge Branch to Main'
+  displayName: 'Commit and Push Changes'
   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
   env:
     GIT_CREDENTIALS: $(GitPAT)
