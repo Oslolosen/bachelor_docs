@@ -33,6 +33,6 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: 'docs/_build/html'
+    targetPath: '/home/vsts/work/1/s/sphinx_test/docs/_build/html'
     artifact: 'HTML'
     publishLocation: 'pipeline'
