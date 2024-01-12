@@ -28,6 +28,7 @@ steps:
     cd sphinx_test/docs
     make clean
     make html
+    $pwd
   displayName: 'Generate HTML documents'
 
 - task: PublishPipelineArtifact@1
