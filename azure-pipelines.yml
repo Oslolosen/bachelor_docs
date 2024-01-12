@@ -32,6 +32,8 @@ steps:
   displayName: 'Generate HTML documents'
 
 - script: |  
+    git config --global user.email "pipeline@azure.com"
+    git config --global user.name "Pipeline"
     git add *
     git commit -m "New edits en repo"
     git push
