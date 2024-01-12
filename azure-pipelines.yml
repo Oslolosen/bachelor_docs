@@ -33,3 +33,11 @@ steps:
     make clean
     make html
   displayName: 'Generate HTML documents'
+
+- script: |
+    git checkout main
+    git pull origin main
+    git merge $(Build.SourceBranchName)
+      
+    git push origin main
+  displayName: 'Merge Branch to Main'
