@@ -33,3 +33,7 @@ steps:
     make clean
     make html
   displayName: 'Generate HTML documents'
+
+- script: |
+    git push origin main
+  displayName: 'push to main'
