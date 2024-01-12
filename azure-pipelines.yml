@@ -33,3 +33,17 @@ steps:
     make clean
     make html
   displayName: 'Generate HTML documents'
+
+- script |
+
+    git fetch --all
+
+    git checkout -B main origin/main
+
+    git merge $(Build.SourceBranchName) --no-ff -m "Merging $(Build.SourceBranchName) into main"
+
+    git push origin main
+  displayName: 'Merge Branch to Main'
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
+  env:
+    GIT_CREDENTIALS: $(GitPAT)
