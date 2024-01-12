@@ -1,13 +1,9 @@
-# Python package
-# Create and test a Python package on multiple Python versions.
-# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/python
-
 trigger:
 - main
 
 pool:
   vmImage: ubuntu-latest
+
 strategy:
   matrix:
     Python37:
@@ -24,7 +20,7 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- script:
+- script: |
     sphinx-apidoc -o sphinx_test/docs sphinx_test/src    
   displayName: 'Parse comments to REST files'
 
@@ -34,15 +30,8 @@ steps:
     make html
   displayName: 'Generate HTML documents'
 
-- script: |
-    git config --global user.email "you@example.com"
-    git config --global user.name "Your Name"
-    git checkout main
-    git pull origin main
-    git add -A
-    git commit -m "Update documentation"
-    git push origin main
-  displayName: 'Commit and Push Changes'
-  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/main'))
-  env:
-    GIT_CREDENTIALS: $(GitPAT)
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(System.DefaultWorkingDirectory)/docs/_build/html'
+    artifact: 'HTML'
+    publishLocation: 'pipeline'
