@@ -36,7 +36,7 @@ steps:
     git config --global user.name "Pipeline"
     git add *
     git commit -m "New edits en repo"
-    git push
+    git push origin HEAD:main
 
 - task: PublishPipelineArtifact@1
   inputs:
