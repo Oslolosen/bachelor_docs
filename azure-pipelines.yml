@@ -30,7 +30,12 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- script: |
-    pip install pytest==7.0.1 pytest-azurepipelines pyspark 
-    pytest test.py
-  displayName: 'pytest'
+- script:
+    sphinx-apidoc -o sphinx_test/docs sphinx_test/src    
+  displayName: 'Parse comments to REST files'
+
+- script: 
+    cd sphinx_test/docs
+    make clean
+    make html
+  displayName: 'Generate HTML documents'
