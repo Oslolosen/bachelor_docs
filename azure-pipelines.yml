@@ -27,7 +27,8 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
-    pip install -r requirements.txt
+    pip install sphinx
+    pip install pip install sphinx-rtd-theme
   displayName: 'Install dependencies'
 
 - script: |
