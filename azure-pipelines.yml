@@ -31,12 +31,10 @@ steps:
     pwd
   displayName: 'Generate HTML documents'
 
-- script: |
-    git checkout main  
-    git pull
+- script: |  
     git add *
     git commit -m "New edits en repo"
-    git push origin main
+    git push
 
 - task: PublishPipelineArtifact@1
   inputs:
