@@ -29,7 +29,7 @@ steps:
     git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
 
     git switch dev                
-    git pull origin dev            
+    git pull origin dev --rebase            
   env:
     GIT_TOKEN: $(GIT_TOKEN)
   displayName: 'Authorization, switch branch and pull'
