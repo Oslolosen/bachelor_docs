@@ -28,8 +28,8 @@ steps:
     git config --global credential.helper store
     git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
 
-    git switch dev                
-    git pull origin dev --rebase            
+    git fetch                
+    git checkout origin dev            
   env:
     GIT_TOKEN: $(GIT_TOKEN)
   displayName: 'Authorization, switch branch and pull'
