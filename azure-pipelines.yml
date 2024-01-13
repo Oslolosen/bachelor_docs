@@ -38,7 +38,7 @@ steps:
     git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
 
     git add *
-    git commit -m "New edits en repo"
+    git commit -m "New edits en repo [skip ci]"
     git push origin HEAD:main
   env:
     GIT_TOKEN: $(GIT_TOKEN)  # Reference to your secret variable
