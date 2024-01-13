@@ -36,7 +36,10 @@ steps:
     git config --global user.name "Pipeline"
     git add *
     git commit -m "New edits en repo"
-    git push origin HEAD:main
+    git -c http.extraHeader="AUTHORIZATION: basic $(GIT_TOKEN)" push origin HEAD:main
+  env:
+    GIT_TOKEN: $(GIT_TOKEN)  # Reference to your secret variable
+  displayName: 'Commit and Push changes'
 
 - task: PublishPipelineArtifact@1
   inputs:
