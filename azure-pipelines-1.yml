@@ -34,13 +34,10 @@ steps:
   displayName: 'Generate HTML documents'
 
 - script: |  
-    git config --global user.email "pipeline@azure.com"
-    git config --global user.name "Pipeline"
-    git config --global credential.helper store
-    git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
+    git fetch --all
+    git checkout -b dev origin/dev  # Checkout and track the dev branch
+    git pull origin dev --rebase    # Optionally, rebase local changes on top of the remote branch
 
-    git checkout dev
-    git pull origin dev
     git add *
     git commit -m "New edits in repo [skip ci]"
     git push origin dev
@@ -49,7 +46,9 @@ steps:
   displayName: 'Commit and Push changes to dev branch'
 
 - script: |
+    git fetch --all
     git checkout main
+    git pull origin main --rebase   # Rebase local main on top of remote main
     git merge dev -m "Merging changes from dev to main [skip ci]"
     git push origin main
   displayName: 'Merge dev into main and push'
