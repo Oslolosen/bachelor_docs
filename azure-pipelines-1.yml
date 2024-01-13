@@ -28,7 +28,7 @@ steps:
     git config --global credential.helper store
     git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
 
-    git checkout origin dev                
+    git switch dev                
     git pull origin dev --rebase            
   env:
     GIT_TOKEN: $(GIT_TOKEN)
