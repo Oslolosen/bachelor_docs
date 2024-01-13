@@ -39,19 +39,14 @@ steps:
     git config --global credential.helper store
     git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
 
-    git pull HEAD:main
+    git checkout dev
+    git pull origin dev
     git add *
-    git commit -m "New edits en repo [skip ci]"
-    git push origin HEAD:main
+    git commit -m "New edits in repo [skip ci]"
+    git push origin dev
   env:
-    GIT_TOKEN: $(GIT_TOKEN)  # Reference to your secret variable
-  displayName: 'Commit and Push changes'
-
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '/home/vsts/work/1/s/sphinx_test/docs/_build/html'
-    artifact: 'HTML'
-    publishLocation: 'pipeline'
+    GIT_TOKEN: $(GIT_TOKEN)
+  displayName: 'Commit and Push changes to dev branch'
 
 - script: |
     git checkout main
