@@ -29,6 +29,7 @@ steps:
     git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
 
     git fetch                
+    git remote -v
     git checkout origin dev            
   env:
     GIT_TOKEN: $(GIT_TOKEN)
