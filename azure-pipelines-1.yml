@@ -1,0 +1,62 @@
+trigger:
+  branches:
+    include:
+    - dev
+
+pool:
+  vmImage: ubuntu-latest
+
+strategy:
+  matrix:
+    Python37:
+      python.version: '3.7'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Use Python $(python.version)'
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: |
+    sphinx-apidoc -o sphinx_test/docs sphinx_test/src    
+  displayName: 'Parse comments to REST files'
+
+- script: |
+    cd sphinx_test/docs
+    make clean
+    make html
+    pwd
+  displayName: 'Generate HTML documents'
+
+- script: |  
+    git config --global user.email "pipeline@azure.com"
+    git config --global user.name "Pipeline"
+    git config --global credential.helper store
+    git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
+
+    git pull HEAD:main
+    git add *
+    git commit -m "New edits en repo [skip ci]"
+    git push origin HEAD:main
+  env:
+    GIT_TOKEN: $(GIT_TOKEN)  # Reference to your secret variable
+  displayName: 'Commit and Push changes'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '/home/vsts/work/1/s/sphinx_test/docs/_build/html'
+    artifact: 'HTML'
+    publishLocation: 'pipeline'
+
+- script: |
+    git checkout main
+    git merge dev -m "Merging changes from dev to main [skip ci]"
+    git push origin main
+  displayName: 'Merge dev into main and push'
+  env:
+    GIT_TOKEN: $(GIT_TOKEN)
