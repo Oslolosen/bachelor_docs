@@ -35,7 +35,7 @@ steps:
 
 - script: |  
     git checkout dev                # Checkout and track the dev branch
-    git pull origin dev --rebase             # Optionally, rebase local changes on top of the remote branch
+    git pull origin dev             # Optionally, rebase local changes on top of the remote branch
 
     git add --all
     git commit -m "New edits in repo [skip ci]"
