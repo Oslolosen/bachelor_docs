@@ -37,6 +37,7 @@ steps:
     git config --global credential.helper store
     git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
 
+    git pull
     git add *
     git commit -m "New edits en repo [skip ci]"
     git push origin HEAD:main
