@@ -34,9 +34,10 @@ steps:
 - script: |  
     git config --global user.email "pipeline@azure.com"
     git config --global user.name "Pipeline"
+    git config --global credential.helper '!f() { sleep 1; echo "username=git token=$(GIT_TOKEN)"; }; f'
     git add *
     git commit -m "New edits en repo"
-    git -c http.extraHeader="AUTHORIZATION: basic $(GIT_TOKEN)" push origin HEAD:main
+    git push origin HEAD:main
   env:
     GIT_TOKEN: $(GIT_TOKEN)  # Reference to your secret variable
   displayName: 'Commit and Push changes'
