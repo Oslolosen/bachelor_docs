@@ -34,7 +34,7 @@ steps:
   displayName: 'Generate HTML documents'
 
 - script: |  
-    git checkout dev                # Checkout and track the dev branch
+    git switch dev                
     git pull origin dev             # Optionally, rebase local changes on top of the remote branch
 
     git add --all
