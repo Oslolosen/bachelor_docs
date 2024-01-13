@@ -34,12 +34,11 @@ steps:
 - script: |  
     git config --global user.email "pipeline@azure.com"
     git config --global user.name "Pipeline"
-    git config --global credential.helper 'cache --timeout=7200'  # Set credential helper
+    git config --global credential.helper store
+    git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
+
     git add *
     git commit -m "New edits en repo"
-    # Use the token as a password with 'git' as the username
-    echo "url=https://github.com/.insteadOf" >> ~/.gitconfig
-    echo "https://$(GIT_TOKEN):x-oauth-basic@github.com" >> ~/.gitconfig
     git push origin HEAD:main
   env:
     GIT_TOKEN: $(GIT_TOKEN)  # Reference to your secret variable
