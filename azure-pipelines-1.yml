@@ -42,12 +42,10 @@ steps:
   displayName: 'Generate HTML documents'
 
 - script: |  
-
     git add --all
     git commit -m "New edits in repo [skip ci]"
+    git push origin dev  
 
-  env:
-    GIT_TOKEN: $(GIT_TOKEN)
   displayName: 'Commit and Push changes to dev branch'
 
 - script: |
@@ -57,5 +55,3 @@ steps:
     git merge dev -m "Merging changes from dev to main [skip ci]"
     git push origin main
   displayName: 'Merge dev into main and push'
-  env:
-    GIT_TOKEN: $(GIT_TOKEN)
