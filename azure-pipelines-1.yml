@@ -1,7 +1,5 @@
 trigger:
-  branches:
-    include:
-    - dev
+  - tull
 
 pool:
   vmImage: ubuntu-latest
@@ -28,8 +26,14 @@ steps:
     git config --global credential.helper store
     git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
 
+<<<<<<< HEAD
     git switch dev                
     git pull origin dev --rebase            
+=======
+    git checkout dev
+    git pull
+
+>>>>>>> 65e1d01efb877b103e3988dddb490983eb99e56e
   env:
     GIT_TOKEN: $(GIT_TOKEN)
   displayName: 'Authorization, switch branch and pull'
@@ -45,6 +49,7 @@ steps:
     pwd
   displayName: 'Generate HTML documents'
 
+<<<<<<< HEAD
 - script: |  
 
     git add --all
@@ -56,10 +61,21 @@ steps:
 
 - script: |
     git fetch --all
+=======
+- script: |
+    git fetch origin
+    git branch --list dev || git checkout -b dev origin/dev
+    git add --all
+    git commit -m "New edits in repo [skip ci]"
+    git push origin dev  
+
+  displayName: 'Commit and Push changes to dev branch'
+
+- script: |
+    git fetch 
+>>>>>>> 65e1d01efb877b103e3988dddb490983eb99e56e
     git checkout main
     git pull origin main --rebase  
     git merge dev -m "Merging changes from dev to main [skip ci]"
     git push origin main
   displayName: 'Merge dev into main and push'
-  env:
-    GIT_TOKEN: $(GIT_TOKEN)

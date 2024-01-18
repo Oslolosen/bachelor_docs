@@ -16,7 +16,7 @@ def calculate_diameter(radius):
     """
     Calculates the diameter of a circle given its radius.
     This is a new function that we added in the new branch.
-    testest
+    testesttestesttest
 
     Parameters:
     radius (float): The radius of the circle.
