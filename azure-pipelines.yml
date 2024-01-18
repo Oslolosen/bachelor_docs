@@ -34,16 +34,19 @@ steps:
     pwd
   displayName: 'Generate HTML documents'
 
-- script: |  
+- script: |
+    
+    branchName=${BUILD_SOURCEBRANCH#refs/heads/}
+
     git config --global user.email "pipeline@azure.com"
     git config --global user.name "Pipeline"
     git config --global credential.helper store
     git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
 
-    git pull HEAD:main
+    git pull origin $(branchName)
     git add *
     git commit -m "New edits en repo [skip ci]"
-    git push origin HEAD:main
+    git push origin origin $(branchName)
   env:
     GIT_TOKEN: $(GIT_TOKEN)  # Reference to your secret variable
   displayName: 'Commit and Push changes'
