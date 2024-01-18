@@ -47,10 +47,9 @@ steps:
   displayName: 'Generate HTML documents'
 
 - script: |
-    git pull origin $(branchName)
     git add --all
     git commit -m "New edits en repo [skip ci]"
-    git push origin HEAD:$(branchName)
+    git push origin HEAD:$currentBranch
   env:
     GIT_TOKEN: $(GIT_TOKEN)  # Reference to your secret variable
   displayName: 'Commit and Push changes'
