@@ -1,7 +1,5 @@
 trigger:
-  branches:
-    include:
-    - dev
+  - dev
 
 pool:
   vmImage: ubuntu-latest
@@ -50,7 +48,7 @@ steps:
 
     git add --all
     git commit -m "New edits in repo [skip ci]"
-    git push origin dev
+
   env:
     GIT_TOKEN: $(GIT_TOKEN)
   displayName: 'Commit and Push changes to dev branch'
