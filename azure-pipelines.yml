@@ -50,7 +50,7 @@ steps:
     echo "Current Branch: $currentBranch"
     git add --all
     git commit -m "New edits en repo [skip ci]"
-    git push origin $currentBranch
+    git push origin HEAD:$currentBranch
   env:
     GIT_TOKEN: $(GIT_TOKEN)  # Reference to your secret variable
     currentBranch: $(currentBranch)
