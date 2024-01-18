@@ -25,7 +25,10 @@ steps:
     git config --global user.name "Pipeline"
     git config --global credential.helper store
     git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
-        
+
+    git checkout dev
+    git pull
+
   env:
     GIT_TOKEN: $(GIT_TOKEN)
   displayName: 'Authorization, switch branch and pull'
@@ -42,7 +45,6 @@ steps:
   displayName: 'Generate HTML documents'
 
 - script: |
-    git checkout dev
     git add --all
     git commit -m "New edits in repo [skip ci]"
     git push origin dev  
