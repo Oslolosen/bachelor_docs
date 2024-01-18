@@ -23,3 +23,15 @@ def calculate_diameter(radius):
     float: The diameter of the circle.
     """
     return 2 * radius
+
+def calculate_area(radius):
+    """
+    Calculates the area of a circle given its radius.
+
+    Parameters:
+    radius (float): The radius of the circle.
+
+    Returns:
+    float: The area of the circle.
+    """
+    return np.pi * radius ** 2
