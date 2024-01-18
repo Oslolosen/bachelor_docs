@@ -35,3 +35,15 @@ def calculate_area(radius):
     float: The area of the circle.
     """
     return np.pi * radius ** 2
+
+def calculate_volume(radius):
+    """
+    Calculates the volume of a sphere given its radius.
+
+    Parameters:
+    radius (float): The radius of the sphere.
+
+    Returns:
+    float: The volume of the sphere.
+    """
+    return (4 / 3) * np.pi * radius ** 3
