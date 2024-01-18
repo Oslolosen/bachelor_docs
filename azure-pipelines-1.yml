@@ -41,7 +41,8 @@ steps:
     pwd
   displayName: 'Generate HTML documents'
 
-- script: |  
+- script: |
+    git checkout dev
     git add --all
     git commit -m "New edits in repo [skip ci]"
     git push origin dev  
