@@ -49,6 +49,7 @@ steps:
 - script: |
     echo "Current Branch: $currentBranch"
     git checkout $currentBranch
+    git fetch
     git add --all
     git commit -m "New edits en repo [skip ci]"
     git push origin HEAD:$currentBranch
