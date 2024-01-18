@@ -47,7 +47,7 @@ steps:
   displayName: 'Generate HTML documents'
 
 - script: |
-    echo "Current Branch: $currentBranch"
+    echo "Current Branch: $(Build.SourceBranchName)
     git add --all
     git commit -m "New edits en repo [skip ci]"
     git push origin HEAD:$currentBranch
