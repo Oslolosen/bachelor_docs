@@ -25,10 +25,7 @@ steps:
     git config --global user.name "Pipeline"
     git config --global credential.helper store
     git config --global http.extraheader "AUTHORIZATION: basic $(echo -n git:$(GIT_TOKEN) | base64)"
-
-    git fetch                
-    git remote -v
-    git checkout origin dev            
+        
   env:
     GIT_TOKEN: $(GIT_TOKEN)
   displayName: 'Authorization, switch branch and pull'
@@ -54,7 +51,7 @@ steps:
   displayName: 'Commit and Push changes to dev branch'
 
 - script: |
-    git fetch --all
+    git fetch 
     git checkout main
     git pull origin main --rebase  
     git merge dev -m "Merging changes from dev to main [skip ci]"
