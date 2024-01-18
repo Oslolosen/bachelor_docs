@@ -52,6 +52,7 @@ steps:
     git push origin $currentBranch
   env:
     GIT_TOKEN: $(GIT_TOKEN)  # Reference to your secret variable
+    currentBranch: $(currentBranch)
   displayName: 'Commit and Push changes'
 
 - task: PublishPipelineArtifact@1
