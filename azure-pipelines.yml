@@ -52,7 +52,7 @@ steps:
     git fetch
     git add --all
     git commit -m "New edits en repo [skip ci]"
-    git push origin HEAD:$currentBranch
+    git push HEAD:$currentBranch
   env:
     GIT_TOKEN: $(GIT_TOKEN)  # Reference to your secret variable
     currentBranch: $(currentBranch)
