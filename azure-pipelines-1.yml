@@ -45,6 +45,8 @@ steps:
   displayName: 'Generate HTML documents'
 
 - script: |
+    git fetch origin
+    git branch --list dev || git checkout -b dev origin/dev
     git add --all
     git commit -m "New edits in repo [skip ci]"
     git push origin dev  
