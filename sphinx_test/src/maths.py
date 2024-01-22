@@ -1,4 +1,7 @@
+import numpy
+
 def add_numbers(a, b):
+
     """
     Adds two numbers together.
 
