@@ -2,3 +2,8 @@ sphinx
 sphinx-rtd-theme
 numpy
 requests
+pulumi
+pulumi_azuredevops
+pulumi_github
+pulumi_azure_native
+
